@@ -38,6 +38,7 @@ class ChangeRequestServiceTests(unittest.TestCase):
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
     def test_submit_without_required_fields_does_not_raise(self) -> None:
+        """Documenteert de startsituatie voor lab 01; verwijderen na implementatie van de businessregel."""
         request = self.service.create_change_request(title="", description="", requester="")
 
         submitted = self.service.submit_change_request(request.id)
