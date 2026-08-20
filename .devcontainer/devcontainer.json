@@ -4,14 +4,11 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/copilot-cli:1": {}
   },
   "remoteUser": "trainer",
   "workspaceFolder": "/workspace/ai-ondersteund-ontwikkelen",
-  "remoteEnv": {
-    "PATH": "/home/trainer/.local/bin:${containerEnv:PATH}"
-  },
-  "postCreateCommand": "gh extension install github/gh-copilot --force && mkdir -p /home/trainer/.local/bin && printf '#!/usr/bin/env bash\nexec gh copilot \"$@\"\n' > /home/trainer/.local/bin/copilot && chmod +x /home/trainer/.local/bin/copilot",
+  
   "customizations": {
     "vscode": {
       "settings": {
