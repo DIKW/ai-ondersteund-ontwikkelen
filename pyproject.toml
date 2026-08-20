@@ -1,0 +1,13 @@
+[project]
+name = "change-request-tracker"
+version = "0.1.0"
+description = "Kleine trainingsapp voor wijzigingsverzoeken"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+
+[project.scripts]
+change-request-tracker = "change_request_tracker.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

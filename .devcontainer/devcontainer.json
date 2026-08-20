@@ -1,0 +1,15 @@
+{
+  "name": "ai-ondersteund-ontwikkelen",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "trainer",
+  "workspaceFolder": "/workspace/ai-ondersteund-ontwikkelen",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  }
+}
