@@ -26,8 +26,8 @@ Een wijzigingsverzoek bevat:
 - `REJECTED -> CLOSED`
 
 ## Oefenbehoeften
-1. Bij indienen moet het verzoek volledig zijn (titel, beschrijving, aanvrager).
-2. Na indienen mag prioriteit niet meer wijzigen; in `DRAFT` wel.
+1. **Dag 1 (bewuste lacune in huidige code):** bij indienen moet het verzoek volledig zijn (titel, beschrijving, aanvrager).
+2. **Dag 2 (nog niet geïmplementeerde veranderwens):** na indienen mag prioriteit niet meer wijzigen; in `DRAFT` wel.
 
 ## Buiten scope
 - Database
