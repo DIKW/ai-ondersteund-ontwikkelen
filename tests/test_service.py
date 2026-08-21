@@ -45,6 +45,39 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
+    def test_list_open_requests_excludes_closed(self) -> None:
+        request = self.service.create_change_request(
+            title="Nieuwe feature",
+            description="Kleine wijziging",
+            requester="team-ops",
+        )
+        self.service.submit_change_request(request.id)
+        self.service.transition_status(request.id, Status.IN_REVIEW)
+        self.service.transition_status(request.id, Status.APPROVED)
+        self.service.transition_status(request.id, Status.CLOSED)
+
+        open_items = self.service.list_change_requests(include_closed=False)
+
+        self.assertEqual(open_items, [])
+
+    def test_service_can_start_with_existing_items(self) -> None:
+        existing = [
+            self.service.create_change_request(
+                title="Bestaande request",
+                description="Vanuit opslag",
+                requester="team-core",
+            )
+        ]
+
+        reloaded_service = ChangeRequestService(items=existing)
+        created = reloaded_service.create_change_request(
+            title="Nieuwe request",
+            description="Na reload",
+            requester="team-core",
+        )
+
+        self.assertEqual(created.id, 2)
+
     @unittest.skip("Lab 01: activeer zodra businessregel is gespecificeerd en geaccepteerd.")
     def test_submit_requires_title_description_and_requester(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")

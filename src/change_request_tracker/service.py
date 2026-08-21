@@ -1,14 +1,18 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import replace
 
 from .models import ChangeRequest, Status
 
 
 class ChangeRequestService:
-    def __init__(self) -> None:
-        self._next_id = 1
+    def __init__(self, items: Iterable[ChangeRequest] | None = None) -> None:
         self._items: dict[int, ChangeRequest] = {}
+        if items is not None:
+            for item in items:
+                self._items[item.id] = item
+        self._next_id = max(self._items, default=0) + 1
 
     def create_change_request(
         self,
@@ -30,6 +34,12 @@ class ChangeRequestService:
 
     def get(self, request_id: int) -> ChangeRequest:
         return self._items[request_id]
+
+    def list_change_requests(self, include_closed: bool = True) -> list[ChangeRequest]:
+        items = sorted(self._items.values(), key=lambda request: request.id)
+        if include_closed:
+            return items
+        return [request for request in items if request.status is not Status.CLOSED]
 
     def submit_change_request(self, request_id: int) -> ChangeRequest:
         current = self.get(request_id)
