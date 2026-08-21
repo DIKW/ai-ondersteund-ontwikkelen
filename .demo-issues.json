@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Verbeter logging",
+    "description": "Voeg context toe aan foutmeldingen",
+    "requester": "team-api",
+    "priority": "HIGH",
+    "status": "CLOSED"
+  },
+  {
+    "id": 2,
+    "title": "Verbeter rapportage",
+    "description": "Maak weekoverzicht per team",
+    "requester": "team-data",
+    "priority": "LOW",
+    "status": "DRAFT"
+  }
+]

@@ -26,6 +26,32 @@ python -m unittest discover -s tests -v
 bash scripts/run-demo.sh
 ```
 
+## CLI-gebruik
+
+Gebruik de app direct via Python met een lokaal JSON-opslagbestand.
+
+Issue aanmaken:
+
+```bash
+PYTHONPATH=src python -m change_request_tracker.cli --db .issues.json create \
+   --title "Bug in export" \
+   --description "CSV export mist kolommen" \
+   --requester "team-data" \
+   --priority HIGH
+```
+
+Open issues tonen:
+
+```bash
+PYTHONPATH=src python -m change_request_tracker.cli --db .issues.json list
+```
+
+Alle issues (inclusief gesloten) tonen:
+
+```bash
+PYTHONPATH=src python -m change_request_tracker.cli --db .issues.json list --all
+```
+
 ## Veilige werkafspraken
 
 - Gebruik alleen trainingsdata; geen productiegebruik.
