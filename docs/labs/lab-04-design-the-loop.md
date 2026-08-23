@@ -1,4 +1,4 @@
-# Lab 03: ontwerp de loop
+# Lab 04: ontwerp de loop
 
 - **Doel:** ontwerp een gecontroleerde planner-implementer-reviewer-lus.
 - **Tijd:** 45-60 min
