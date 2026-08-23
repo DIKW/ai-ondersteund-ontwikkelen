@@ -12,6 +12,17 @@
 5. Leg in een kort startnotitie vast: scope, bronnen, verwachte pagina's en reviewmoment.
 6. Voeg een nieuwe append-only logregel toe voor de start van de oefening.
 
+## Voorbeeld startnotitie
+
+Gebruik dit als compact format:
+
+- Vraag: Welke controles zijn nodig voor veilige AI-ondersteunde merge-review?
+- Scope: maximaal 3 wiki-pagina's (1 concept, 1 proces, 1 checklist).
+- Bronnen: `knowledge-lab/raw/...` (expliciete bestandsnamen opnemen).
+- Taxonomie-tags: `verification`, `review`, `governance`.
+- Reviewmoment: menselijke review na eerste conceptversie.
+- Bekende onzekerheid: definities van "voldoende bewijs" verschillen per team.
+
 ## Verwachte artefacten
 - Startnotitie met scope en bronselectie
 - Geactualiseerde `knowledge-lab/log.md` (append-only)
@@ -25,6 +36,20 @@
 ## Stop/escalatie
 - Escaleer als bronkwaliteit of herkomst onduidelijk is.
 - Stop bij conflict met `SCHEMA.md`-grenzen.
+
+## Klaarcheck
+Controleer objectief:
+- Startnotitie bevat vraag, scope, bronlijst, tags en reviewmoment.
+- `knowledge-lab/log.md` heeft een nieuwe append-only regel.
+- Scope blijft binnen maximaal 3 wiki-pagina's.
+- Gekozen tags vallen binnen de taxonomie uit `SCHEMA.md`.
+
+## Handoff naar lab 08
+Gebruik deze output als ingang voor lab 08:
+- Goedgekeurde bronlijst.
+- Gekozen taxonomie-tags.
+- Gedefinieerde trainingsvraag.
+- Open onzekerheden die expliciet gemarkeerd moeten blijven.
 
 ## Reflectie
 - Welke startkeuze verkleinde het risico op hallucinatie of scope-uitbreiding het meest?
