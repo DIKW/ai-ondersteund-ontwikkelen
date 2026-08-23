@@ -62,8 +62,15 @@ PYTHONPATH=src python -m change_request_tracker.cli --db .issues.json list --all
 
 1. Lab 01: analyse naar spec
 2. Lab 02: spec naar beperkte wijziging
-3. Lab 03: ontwerp de loop
-4. Lab 04: voer de loop uit
+3. Lab 03: bewijsgedreven review
+4. Lab 04: ontwerp de loop
+5. Lab 05: voer de loop uit
+6. Lab 06: loop tuning met meetbare verbetering
+7. Lab 07: LLMWiki starten
+8. Lab 08: LLMWiki content toevoegen
+
+Optioneel (advanced):
+9. Lab 09: skill maken voor gestandaardiseerde handoffs
 
 Zie `docs/labs/` voor werkbladen.
 

@@ -1,8 +1,8 @@
-# Lab 04: voer de loop uit
+# Lab 05: voer de loop uit
 
 - **Doel:** voer de volledige beperkte lus uit op dezelfde feature.
 - **Tijd:** 60-75 min
-- **Startpunt:** ontwerp uit lab 03
+- **Startpunt:** ontwerp uit lab 04
 
 ## Stappen
 1. Plan laten maken en menselijk goedkeuren.
