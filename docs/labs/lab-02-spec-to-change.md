@@ -4,6 +4,17 @@
 - **Tijd:** 60-75 min
 - **Startpunt:** uitkomst lab 01
 
+## Definitie: kleine wijziging
+
+Gebruik in dit lab een wijziging die klein en gecontroleerd blijft:
+
+- Raakt bij voorkeur 1 primair gedrag uit de spec.
+- Beperkt tot een kleine set bestanden (richtlijn: 1-3 bestanden wijzigen).
+- Geen nieuwe dependencies of infrastructuur.
+- Inclusief minimaal 1 bewijsstap (test of check) die de wijziging valideert.
+
+Voorbeeld van passende scope: validatie toevoegen op een bestaande service-methode met bijbehorende testaanpassing.
+
 ## Stappen
 1. Vraag de planner om een plan.
 2. Beslis als mens of plan klein genoeg is.
@@ -19,7 +30,31 @@
 - Reviewuitkomst
 
 ## Kwaliteitscheck
-- Wijziging volgt spec en blijft binnen scope.
+- Gebruik onderstaande rubric. Richtlijn: minimaal **voldoende** op alle criteria.
+
+| Criterium | Onvoldoende | Voldoende | Goed | Voorbeeldig |
+|---|---|---|---|---|
+| Spec-naleving | Wijziging wijkt af van spec | Wijziging dekt speckern | Wijziging dekt speckern + randvoorwaarde | Wijziging dekt speckern volledig met expliciete traceerbaarheid |
+| Scopebeheersing | Scope groeit ongecontroleerd | Wijziging blijft klein | Wijziging blijft klein met expliciete niet-doen-keuzes | Wijziging blijft klein en motiveert actief afgewezen uitbreidingen |
+| Testbewijs | Geen of zwak bewijs | Relevante test/check is uitgevoerd | Bewijs toont positief en negatief pad | Bewijs is compleet, reproduceerbaar en herleidbaar naar criteria |
+| Reviewkwaliteit | Review is oppervlakkig | Minimaal 1 inhoudelijke bevinding of gemotiveerde afwijzing | Bevindingen zijn geprioriteerd op risico | Review koppelt risico's expliciet aan spec en testbewijs |
+
+## Klaarcheck
+Voer uit in de repository-root:
+
+```bash
+bash scripts/check.sh
+```
+
+**Verwachte uitkomst:**
+- Het script eindigt succesvol (exit code `0`).
+- Je hebt een plan, beperkte wijziging, testbewijs en reviewuitkomst.
+- De rubric scoort minimaal voldoende op alle criteria.
+
+## Troubleshooting (kort)
+- Tests falen: controleer of de wijziging exact de spec raakt en geen extra gedrag introduceert.
+- Scope wordt te groot: knip de wijziging op en rond eerst het kleinste specdeel af.
+- Review geeft tegenstrijdige signalen: escaleren op onduidelijke businessregel in plaats van gokken.
 
 ## Stop/escalatie
 - Escaleer als wijziging buiten afgesproken scope groeit.
