@@ -29,6 +29,7 @@
 ## Niet wijzigen tijdens labs
 - Trainingskaders in `AGENTS.md`
 - Basisafspraken in `docs/decisions/training-repository-scope.md`
+- Tokenafspraken in `docs/decisions/token-policy-ai-sessies.md`
 - Devcontainer-beveiligingsgrenzen
 
 ## Veilig samenwerken
