@@ -43,6 +43,10 @@ Wordt whitespace-only (`"   "`) behandeld als leeg?
 - Acceptatiecriteria
 - Open vraag/aanname
 
+## Modeluitwerking (voor reviewfase)
+- Zie `docs/lab-uitwerkingen/lab-01/model-uitwerking.md`.
+- Gebruik deze uitwerking pas na de eigen poging van het team, als kalibratie.
+
 ## Kwaliteitscheck
 - Gebruik onderstaande rubric. Richtlijn: minimaal **voldoende** op alle criteria.
 
