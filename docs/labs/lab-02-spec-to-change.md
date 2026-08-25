@@ -29,6 +29,10 @@ Voorbeeld van passende scope: validatie toevoegen op een bestaande service-metho
 - Testbewijs
 - Reviewuitkomst
 
+## Modeluitwerking (voor reviewfase)
+- Zie `docs/lab-uitwerkingen/lab-02/model-uitwerking.md`.
+- Gebruik deze uitwerking pas na de eigen poging van het team, als kalibratie.
+
 ## Kwaliteitscheck
 - Gebruik onderstaande rubric. Richtlijn: minimaal **voldoende** op alle criteria.
 

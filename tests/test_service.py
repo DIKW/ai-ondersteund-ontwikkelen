@@ -37,13 +37,14 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
-    def test_submit_without_required_fields_does_not_raise(self) -> None:
-        """Documenteert de startsituatie voor lab 01; verwijderen na implementatie van de businessregel."""
+    def test_submit_without_required_fields_raises(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")
 
-        submitted = self.service.submit_change_request(request.id)
+        with self.assertRaisesRegex(ValueError, "Verplichte velden ontbreken"):
+            self.service.submit_change_request(request.id)
 
-        self.assertEqual(submitted.status, Status.SUBMITTED)
+        current = self.service.get(request.id)
+        self.assertEqual(current.status, Status.DRAFT)
 
     def test_list_open_requests_excludes_closed(self) -> None:
         request = self.service.create_change_request(
@@ -78,7 +79,6 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(created.id, 2)
 
-    @unittest.skip("Lab 01: activeer zodra businessregel is gespecificeerd en geaccepteerd.")
     def test_submit_requires_title_description_and_requester(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")
 
