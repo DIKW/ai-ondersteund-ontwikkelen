@@ -16,17 +16,6 @@ Beperk toegang van AI-tools tot alleen wat nodig is voor de huidige taak en repo
 - Codewijziging met PR: `Metadata: Read`, `Contents: Read/Write`, `Pull requests: Read/Write`.
 - Beheeracties (admin/secrets/repo-settings): niet toegestaan in trainingssessies.
 
-## Rechtenmatrix voor dit traject
-
-| Taak | Token nodig | Minimale rechten |
-|---|---|---|
-| Lokaal werken in workspace (bestanden, tests, docs) | Nee | n.v.t. |
-| Push naar feature branch | Ja | `Metadata: Read`, `Contents: Read and Write` |
-| PR aanmaken of bijwerken | Ja | `Metadata: Read`, `Contents: Read and Write`, `Pull requests: Read and Write` |
-| Merge/repo-instellingen/secrets | Nee (menselijke gate) | Niet toestaan in AI-trainingssessie |
-
-Standaard voor deze samenwerking: gebruik 1 fine-grained token met scope op exact deze repository, met korte expiry (bij voorkeur 1 dag).
-
 ## Korte howto: fine-grained PAT op GitHub
 1. Open GitHub en ga naar Settings -> Developer settings -> Personal access tokens -> Fine-grained tokens.
 2. Kies Generate new token.
