@@ -8,7 +8,7 @@
 **Tijd per dag:** 09:30–16:30 (ochtend les + middag oefenen)
 **Lunch:** 12:30–13:15
 **Voorbereiding per deelnemer:** maximaal 45 minuten (technische checklist + intake)
-**Tools:** Visual Studio Code, GitHub Copilot, trainingsrepository met devcontainer
+**Tools:** Visual Studio Code, GitHub Copilot, GitHub Spec Kit
 
 ---
 
@@ -16,12 +16,15 @@
 
 De training combineert uitleg van principes met hands-on oefenblokken. Deelnemers werken in kleine teams aan afgebakende wijzigingen, gebruiken AI bij analyse en implementatie, en ronden iedere oefening af met verificatie en review.
 
-Twee samenhangende concepten:
+Drie samenhangende concepten:
 
 1. **Spec-Driven Development** — Hoe teams een wijziging eerst scherp beschrijven: doel, scope, acceptatiecriteria en grenzen. De mens definieert *wat*, de AI bepaalt *hoe*.
 2. **Loop Engineering** — Hoe AI-ondersteunde ontwikkelstappen worden ingericht als een gecontroleerd proces van plannen, uitvoeren, verifiëren, reviewen en zo nodig bijsturen.
+3. **Kennis en structuur van het AI-systeem** — met twee onderdelen:
+   - **Kennisgrafen** — hoe een organisatie haar kennis dusdanig vastlegt dat het compounding is, vindbaar voor mens én agent, en schaalbaar naar een enterprise semantische laag. Dit is het conceptueel belangrijkste onderdeel van Dag 3: een organisatie zonder een kennisinfrastructuur kan geen AI-systeem effectief runnen. Kennisgrafen zijn geen hype — ze zijn de basis waarop alles andere rust.
+   - **Graph Engineering** — hoe je gecontroleerde loops splitst in gespecialiseerde agents die samenwerken in een uitvoerbare graaf. Dit is de volgende stap na Loop Engineering en wordt steeds relevanter, maar het is pas zinvol als de vorige twee concepten staan.
 
-*Geen "vibe coding" — geen ad-hoc gebruik van AI zonder structuur. Wel bewuste, gestuurde samenwerking tussen menselijke domeinkennis en AI-executie.*
+*Geen "vibe coding" — geen ad-hoc gebruik van AI zonder structuur. Wel bewuste, gestuurde samenwerking tussen menselijke domeinkennis en AI-executie. En geen graaf om de graaf: de kennis die je als organisatie hebt, is belangrijker dan de structuur waarin je agents draaien.*
 
 ---
 
@@ -31,7 +34,7 @@ Twee samenhangende concepten:
 |-----|-------|---------------------|
 | Dag 1 | Specificeren, context geven en gecontroleerd veranderen | Een kleine spec, een beperkte AI-ondersteunde wijziging en aantoonbaar test-/verificatiebewijs |
 | Dag 2 | Een ontwikkellus ontwerpen en agents laten samenwerken | Een eenvoudige planner–implementer–reviewer-workflow met heldere rollen en reviewgate |
-| Dag 3 | Kennis vastleggen, van wiki naar organisatiebrede semantische laag | Een eerste AI-kennisgraaf op basis van llm-wiki met structuur en semantische laag die 'agent ready' is |
+| Dag 3 | Kennis vastleggen, van wiki naar organisatiebrede semantische laag; vooruitblik op Graph Engineering | Een eerste BIDN AI-kennisgraaf op basis van llm-wiki met structuur en semantische laag die 'agent ready' is; en een vooruitblik op Graph Engineering als volgende stap na Loop Engineering |
 
 ---
 
@@ -71,6 +74,7 @@ Twee samenhangende concepten:
 **4. Spec-Driven Development in de praktijk (11:35–12:15)**
 - Drie niveaus van SDD: Spec-First → Spec-Anchored → Spec-as-Source
 - De vier fasen: Research → Specify → Clarify → Build
+- Spec Kit als toolkit (GitHub, MIT-licentie) — `specify` CLI en `/speckit.*`-slash-commando's
 - Constitution: het persistente regelsdocument boven elke spec — met voorbeeld
 - Echte voorbeelden: spec, constitution en verify-output
 
@@ -83,20 +87,24 @@ Twee samenhangende concepten:
 
 ### Middag (13:15–16:30) — Oefenen (in teams)
 
-**6. Lab 01: analyse naar spec (13:15–14:15)**
-- Teams analyseren domein, code en tests en schrijven een beperkte spec.
+**6. Hands-on: eerste stappen met Copilot (13:15–14:15)**
+- *Eigen LAB 01: analyse naar spec* — lees de codebase, analyseer domeindocumentatie, schrijf een beperkte spec met acceptatiecriteria
+- *Eigen LAB 02: spec naar beperkte wijziging* — vertaal de spec naar een kleine implementatie met plan, code en testbewijs
+- Focus: de agent als junior developer — geef hem context, check het resultaat
 
-**7. Lab 02: spec naar beperkte wijziging (14:15–15:15)**
-- Teams vertalen spec naar een kleine wijziging met bewijs.
+*(pauze 14:15–14:25)*
 
-*(pauze 15:15–15:30)*
-
-**8. Lab 03: bewijsgedreven review (15:30–16:00)**
-- Teams reviewen op spec-conformiteit, risico en bewijs.
-
-**9. Peer review en afsluiting (16:00–16:30)**
-- Teams beoordelen niet alleen de code, maar ook de spec, gemaakte aannames en het bewijs dat de wijziging doet wat nodig is
+**7. Peer review en afsluiting (14:25–16:00)**
+- *Eigen LAB 03: bewijsgedreven review* — beoordeel de wijziging van een ander team op bewijs, regressierisico en spec-conformiteit
+- Classificeer bevindingen op ernst: blokkerend, belangrijk, suggestie
+- Formuleer reviewbesluit: accepteren, terugsturen of escaleren
 - Bespreek: wat ging makkelijk, wat was lastig, hoe communiceer je beter met de agent?
+
+*(pauze 15:45–16:00)*
+
+**8. Terugkoppeling dag 1 (16:00–16:30)**
+- Teams delen hun reviewbevindingen
+- Welke aanname had de meeste impact? Welk bewijs gaf het meeste vertrouwen?
 
 ---
 
@@ -112,7 +120,7 @@ Twee samenhangende concepten:
 
 **2. Van losse iteraties naar systematische loops (10:00–11:00)**
 - **Loop Engineering**: niet één keer AI gebruiken, maar systemen bouwen die AI-iteraties managen
-- De 6-stappen core loop: Plan → Spec → Code → Test → Review → Ship
+- De 6-stappen core loop: Plan → Search → Modify → Verify → Repair → Summarize
 - Loop patterns en failure modes
 - Wanneer stopt de agent? Wanneer escaleert naar de mens?
 
@@ -134,28 +142,26 @@ Twee samenhangende concepten:
 
 ### Middag (13:15–16:30) — Oefenen (in teams)
 
-**4. Lab 04: ontwerp de loop (13:15–14:15)**
-- Teams ontwerpen rolmatrix, handoffs, stopvoorwaarden en escalatieregels.
+**4. Hands-on: loop inrichten (eigen LAB 04–06) (13:15–15:00)**
+- *Eigen LAB 04: ontwerp de loop* — vertaal een businessbehoefte naar een gestructureerde AI-ontwikkellus: rollen, gates, escalatiepunten
+- *Eigen LAB 05: voer de loop uit* — implementeer de ontworpen loop met de agent als gecontroleerd uitvoerend teamlid
+- *Eigen LAB 06: loop tuning met meetbare verbetering* — optimaliseer de loop op basis van metingen; bewijs dat de aanpassing helpt
 
-**5. Lab 05: voer de loop uit (14:15–15:00)**
-- Teams draaien planner-implementer-reviewer met evidence-based gates.
-
-**6. Lab 06: loop tuning met metrics (15:00–15:45)**
-- Teams vergelijken baseline en verbeterde cyclus op meetbare criteria.
-
-**Optioneel (advanced): Lab 09 (verdieping)**
-- Skill voor gestandaardiseerde handoffs bij teams die voorlopen.
+**5. Team-oefening: planner–implementer–reviewer (15:00–16:15)**
+- Teams werken met drie rollen: planner (specificeert), implementer (orchestreert met agent), reviewer (onafhankelijke check)
+- Oefenen met gecontroleerde handoffs, verschillende rechten per rol
+- *Eigen LAB 06 (verder):* loop tuning in de context van de driehoek planner–implementer–reviewer
 
 *(pauze 15:45–16:00)*
 
-**7. Afsluiting (16:00–16:30)**
+**6. Afsluiting (16:00–16:30)**
 - Groepsreflectie: wat werkt al, wat moet nog beter?
 
 ---
 
-## Dag 3 — Van persoonlijke wiki naar enterprise semantische laag
+## Dag 3 — Van wiki naar kennisgraaf en vooruitblik op Graph Engineering
 
-**Doel:** Kennis dusdanig vastleggen dat een organisatiebrede kennisgraaf ontstaat die voor mens én agent werkt. Van llm-wiki als eerste stap naar het vergezicht op een enterprise semantische laag.
+**Doel:** Kennis dusdanig vastleggen dat een organisatiebrede kennisgraaf ontstaat die voor mens én agent werkt. 
 
 ### Ochtend (09:30–12:30) — Les
 
@@ -175,7 +181,7 @@ Twee samenhangende concepten:
 
 *(pauze 11:00–11:15)*
 
-**3. Van wiki naar kennisgraaf: gbrain en het ecosystem (11:15–12:30)**
+**3. Van wiki naar kennisgraaf: gbrain en het ecosysteem (11:15–12:15)**
 - **Waarna komt een llm-wiki?** — wanneer handmatig linken niet meer schaalbaar is
 - **gbrain** (Garry Tan): self-wiring knowledge graph — auto-linking zonder LLM (pattern matching), hybride retrieval (vector + BM25), gesynthetiseerde antwoorden met bronvermelding
 - Vergelijking van kennisgraaf-systemen:
@@ -189,29 +195,31 @@ Twee samenhangende concepten:
   - Agents die kennis automatisch capteren uit code reviews, specs, en documentatie
   - De semantische laag als 'agent-ready' infrastructure: agents kunnen kennis zoeken, gebruiken en aanvullen zonder de mens
 
+*(pauze 12:15–12:25)*
+
+**3a. Graph Engineering: van loops naar uitvoerbare grafen — vooruitblik (12:25–12:30)**
+- **De vijf lagen AI-engineering:** prompt → context → harness → loop → graph engineering
+- **Waarom één loop niet genoeg is:** contextrot, foutcascade, tool-overbelasting, speler én scheidsrechter
+- **Uitvoerbare grafen** — nodes, edges, state, policy (V/E/S/P) als organisatieschema
+- **De verifier:** oordeel en verificatie splitsen in onafhankelijke nodes — het belangrijkste patroon
+- **Determinisme:** code in edges, oordeel in nodes — zonder harde ankerpunten is elke graaf een hallucinatiefabriek
+- **Wanneer wel/niet:** geen graaf om de graaf — drie situaties waarin multi-agent zinvol is
+- **Kennisgraaf vs. uitvoerbare graaf:** wat het systeem *weet* vs. wie het systeem *is*
+- Dit is de volgende stap na Loop Engineering — niet vandaag nog, maar het landschap verandert snel
+
 ### Lunch (12:30–13:15)
 
 ### Middag (13:15–16:30) — Oefenen (in teams)
 
-**4. Lab 07: LLMWiki starten (13:15–14:15)**
-- Veilige start: scope, bronnen, taxonomie, governance en startnotitie.
-
-**5. Lab 08: LLMWiki content toevoegen (14:15–15:15)**
-- Content-intake met provenance, confidence en menselijke review.
-
-*(pauze 15:15–15:30)*
-
-**6. Hands-on: Organisatie AI-kennisgraaf bouwen (15:30–16:00)**
-- Teams bouwen een eerste llm-wiki voor de organisatie — van schone lei
-- Uitgangspunt: een set organisatie-bronnen (docs, architecturen, procesbeschrijvingen) — vooraf aangeleverd
-- **Stap 1:** Raw sources ingesten — bronnen vastleggen met metadata en checksums
-- **Stap 2:** Concepten en entiteiten uit de bronnen destilleren — AI helpt bij het scherpstellen
-- **Stap 3:** Wikilinks leggen — de semantische connecties maken zichtbaar
-- **Stap 4:** Schema definiëren — tag-taxonomie en conventies voor organisatie-specifieke context
-- **Stap 5:** Queries — primair via beschikbare tooling, fallback via handmatige 3-vragen-oefening
+**4. Hands-on: BIDN AI-kennisgraaf bouwen — eigen LAB 07–09 (13:15–15:30)**
+- *Eigen LAB 07: LLMWiki starten* — teams bouwen een eerste llm-wiki voor BIDN vanuit `knowledge-lab/`: raw sources ingesten met metadata en checksums
+- *Eigen LAB 08: LLMWiki content toevoegen* — concepten en entiteiten destilleren uit BIDN-bronnen; wikilinks leggen; schema definiëren met tag-taxonomie en conventies
+- *Eigen LAB 09: skill maken voor gestandaardiseerde handoffs (optioneel)* — een herbruibare skill voor gestandaardiseerde agent-handoffs; alleen als tijd en energie toereiken
 - Focus: de mens curateert en beslist; AI samenvat, kruisverwijst en stelt voor
 
-**7. Van wiki naar enterprise: het pilotexperiment (16:00–16:30)**
+*(pauze 15:30–15:45)*
+
+**5. Van wiki naar enterprise: het pilotexperiment (15:45–16:30)**
 - Hoe zou deze pilot wiki opschalen naar de hele organisatie?
 - Per team een wiki, cross-geklonken naar een centrale semantische laag — wat zijn de volgende stappen?
 - Werkafspraken: welke conventies, tag-taxonomie en review-processen hanteer je organisatiebreed?
@@ -226,14 +234,16 @@ Om de trainingsdagen volledig aan leren en oefenen te besteden, regelen we voora
 - Een veilige, gesanitiseerde trainingsrepository en één afgebakende klant-oefencase
 - GitHub- en GitHub Copilot-toegang voor alle deelnemers
 - Een actuele installatie van Visual Studio (Code) en Git
-- Akkoord voor gebruik van de trainingsrepository met devcontainer en Copilot CLI
+- Akkoord voor gebruik van GitHub Spec Kit — trainingsrepository met kleine lab-oefeningen op basis van een dev-container met GitHub Copilot CLI en een minimale set specs
 - Een inhoudelijke contactpersoon voor domeinvragen en opvolging
 
 Deelnemers ontvangen vooraf een korte technische checklist en intake. De totale voorbereiding per deelnemer bedraagt maximaal 45 minuten.
 
 De lab-omgeving zal in de vorm van een dev-container-definitie beschikbaar worden gesteld door DIKW Academy.
 
-Aanvullende Microsoft Learn-oefeningen kunnen optioneel als huiswerk worden ingezet.
+Voor concrete oefeningen gebruiken we een eigen set labs: https://github.com/DIKW/ai-ondersteund-ontwikkelen/tree/main
+
+Deelnemers kunnen aanvullend de Microsoft Learn GitHub Copilot exercises als optioneel huiswerk doorlopen: https://microsoftlearning.github.io/mslearn-github-copilot-dev/
 
 ---
 
@@ -254,22 +264,29 @@ Na de training beschikt de klant over:
 | Onderdeel | Duur |
 |-----------|------|
 | Dag 1 (training) | 5 uur 45 min |
-| Huiswerk / oefeningen | 2 uur |
+| Huiswerk / oefeningen | 3 uur |
 | Dag 2 (training) | 5 uur 45 min |
-| Huiswerk / oefeningen | 2 uur |
+| Huiswerk / oefeningen | 3 uur |
 | Dag 3 (training) | 5 uur 45 min |
-| Huiswerk / oefeningen | 2 uur |
 | Voorbereiding (voor de training) | 45 min |
-| **Totaal** | **~18 uur** |
+| **Totaal** | **18 uur contact + 12 uur zelfstudie** |
 
 ---
 
 ## Bronnen & Referenties
 
-**Microsoft Learn GitHub Copilot Exercises** (optioneel als huiswerk)
+**Eigen labs (tijdens training)**
+- https://github.com/DIKW/ai-ondersteund-ontwikkelen/tree/main
+- LAB 01–03: Dag 1 (analyse naar spec, spec naar wijziging, bewijsgedreven review)
+- LAB 04–06: Dag 2 (loop ontwerp, uitvoeren, tuning)
+- LAB 07–09: Dag 3 (LLMWiki starten, content toevoegen, skill voor handoffs — optioneel)
+
+**Microsoft Learn GitHub Copilot Exercises (huiswerk — optioneel)**
 - https://microsoftlearning.github.io/mslearn-github-copilot-dev/
-- LAB 01–03: aanvullende basisoefeningen
-- LAB 15: aanvullende oefening custom agents/handoffs
+- LAB AKA 03: code completion — contrast met SDD (ouderwetse prompts zonder spec)
+- LAB AKA 14: volledige product feature met Spec Kit — compleet SDD-traject
+- LAB AKA 15: custom agents en handoffs — in eigen tempo
+- *Niet tijdens de training gedaan omdat deze labs (.NET + Spec Kit) te complex zijn; de kernbegrippen komen beter uit de eigen labs naar voren*
 
 **Kennisgrafen & Wiki**
 - Karpathy: LLM Wiki patroon (compounding knowledge base)
@@ -278,6 +295,7 @@ Na de training beschikt de klant over:
 
 **Wiki-concepten**
 - Anthropic: *Agentic coding and persistent returns to expertise* (400K sessies analyse)
+- GitHub Spec Kit (MIT-licentie, `specify` CLI + `/speckit.*`-commando's)
 - Addy Osmani: Loop Engineering, Software Factories
 - Panaversity: Spec-Driven Development Crash Course
 
