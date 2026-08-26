@@ -37,14 +37,6 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
-    def test_submit_without_required_fields_does_not_raise(self) -> None:
-        """Documenteert de startsituatie voor lab 01; verwijderen na implementatie van de businessregel."""
-        request = self.service.create_change_request(title="", description="", requester="")
-
-        submitted = self.service.submit_change_request(request.id)
-
-        self.assertEqual(submitted.status, Status.SUBMITTED)
-
     def test_list_open_requests_excludes_closed(self) -> None:
         request = self.service.create_change_request(
             title="Nieuwe feature",
@@ -78,9 +70,32 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(created.id, 2)
 
-    @unittest.skip("Lab 01: activeer zodra businessregel is gespecificeerd en geaccepteerd.")
     def test_submit_requires_title_description_and_requester(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")
 
         with self.assertRaises(ValueError):
             self.service.submit_change_request(request.id)
+
+    def test_submit_without_title_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="", description="Omschrijving", requester="team-ops")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)
+
+    def test_submit_without_description_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="Feature X", description="", requester="team-ops")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)
+
+    def test_submit_without_requester_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="Feature X", description="Omschrijving", requester="")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)

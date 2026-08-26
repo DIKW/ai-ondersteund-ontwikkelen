@@ -36,6 +36,14 @@
 - Werk per team op eigen branch of fork.
 - Laat menselijke review verplicht vóór merge.
 
+## Trainingsstates in GitHub
+- Gebruik per lab een vaste feature branch voor uitwerking (bijvoorbeeld `training/lab-01`).
+- Gebruik per lab twee tags voor reproduceerbare states:
+	- `lab-01-start`
+	- `lab-01-solution`
+- Herhaal dit patroon voor volgende labs (`lab-02-start`, `lab-02-solution`, etc.).
+- Gebruik start-tags als oefenstartpunt en solution-tags als referentie tijdens review.
+
 ## Fallback zonder Copilot CLI
 Deelnemers schrijven spec, plan en review handmatig in Markdown.
 
