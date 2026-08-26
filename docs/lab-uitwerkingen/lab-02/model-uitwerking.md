@@ -14,6 +14,49 @@ Vertaal de Lab 01-spec naar een kleine codewijziging die voorkomt dat onvolledig
 3. Laat bij ontbrekende velden een `ValueError` terugkomen met duidelijke melding.
 4. Werk tests bij zodat zowel geslaagde submit als falende submit-varianten zijn afgedekt.
 
+## Sub-agent uitvoering (input en output)
+
+### Planner-agent
+- **Input**
+    - Voorbeeldfeature uit Lab 01: `docs/lab-uitwerkingen/lab-01/voorbeeld-feature-voor-lab-02.md`.
+    - Lab 02-opdrachtkader uit `docs/labs/lab-02-spec-to-change.md`.
+    - Domeinregel uit `docs/domain.md`: submit vereist complete velden.
+    - Bestaande code in `src/change_request_tracker/service.py` en tests in `tests/test_service.py`.
+- **Output**
+    - Maximaal 5-stappenplan:
+        1. Voeg submit-validatie toe op `title`, `description`, `requester`.
+        2. Behoud bestaande statusregels; geen scope-uitbreiding.
+        3. Activeer negatieve test voor ontbrekende velden.
+        4. Behoud positieve submit-test.
+        5. Draai `bash scripts/check.sh` en leg reviewbesluit vast.
+    - Relevante bestanden: `src/change_request_tracker/service.py`, `tests/test_service.py`.
+    - Aannames: whitespace-only geldt als ontbrekend veld.
+    - Risico: onduidelijkheid over expliciete vastlegging van whitespace-regel.
+    - Open vraag: moet de whitespace-regel bronmatig expliciet worden gemaakt?
+
+### Implementer-agent
+- **Input**
+    - Goedgekeurd planner-plan.
+    - Scopegrens: alleen submit-validatie + bijbehorende tests.
+- **Output**
+    - Diff-samenvatting:
+        - `submit_change_request` valideert nu lege/whitespace verplichte velden.
+        - Negatieve submit-test geactiveerd en permissieve test omgezet naar faalpad met statusbehoud op `DRAFT`.
+    - Testuitvoer:
+        - `bash scripts/check.sh` -> `OK`.
+    - Onzekerheden:
+        - Functioneel gedrag is correct, maar businessregel rond whitespace vraagt expliciete documentatie voor toekomstige reviews.
+
+### Reviewer-agent
+- **Input**
+    - Spec (Lab 02), planner-output, implementer-diff en testbewijs.
+- **Output**
+    - Oordeel: `akkoord voor menselijke merge-review`.
+    - Onderbouwing:
+        - Scope is beheerst en spec-conform.
+        - Positief en negatief pad zijn aantoonbaar afgedekt.
+        - Restpunt: leg whitespace-regel expliciet vast als follow-up/rework om interpretatierisico te verlagen.
+
 ## Compacte git-diff (uitgevoerd)
 ```diff
 --- a/src/change_request_tracker/service.py
