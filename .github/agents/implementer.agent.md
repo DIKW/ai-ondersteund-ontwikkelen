@@ -1,3 +1,9 @@
+---
+name: Implementer
+description: Gebruik voor het uitvoeren van een goedgekeurd plan met minimale scope, gerichte codewijzigingen en testbewijs.
+tools: [read, search, edit, execute]
+---
+
 # Implementer-agent
 
 ## Doel
