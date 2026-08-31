@@ -4,7 +4,8 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/copilot-cli:1": {}
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/copilot-cli:1": {}
   },
   "remoteUser": "trainer",
   "workspaceFolder": "/workspace/ai-ondersteund-ontwikkelen",

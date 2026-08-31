@@ -1,3 +1,9 @@
+---
+name: Reviewer
+description: Gebruik voor beoordeling van spec-naleving, scope, risico en bewijs; geef exact een eindoordeel.
+tools: [read, search]
+---
+
 # Reviewer-agent
 
 ## Doel

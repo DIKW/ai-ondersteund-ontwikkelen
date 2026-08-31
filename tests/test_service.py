@@ -84,3 +84,27 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.service.submit_change_request(request.id)
+
+    def test_submit_without_title_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="", description="Omschrijving", requester="team-ops")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)
+
+    def test_submit_without_description_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="Feature X", description="", requester="team-ops")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)
+
+    def test_submit_without_requester_raises_and_stays_draft(self) -> None:
+        request = self.service.create_change_request(title="Feature X", description="Omschrijving", requester="")
+
+        with self.assertRaises(ValueError):
+            self.service.submit_change_request(request.id)
+
+        self.assertEqual(self.service.get(request.id).status, Status.DRAFT)
