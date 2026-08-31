@@ -2,7 +2,7 @@
 
 - **Doel:** beoordeel een wijziging primair op bewijs, regressierisico en spec-conformiteit.
 - **Tijd:** 45-60 min
-- **Startpunt:** uitkomst van lab 02 (plan, codewijziging, testresultaten)
+- **Startpunt:** state `lab-02-solution` (uitkomst van lab 02 inclusief codewijziging en testresultaten)
 
 ## Stappen
 1. **(8-10 min)** Lees spec, plan en diff zonder direct op stijl te focussen.
@@ -48,3 +48,6 @@ bash scripts/check.sh
 
 ## Reflectie
 - Welke reviewbevinding gaf het meeste risicoreductie tegen minimale extra inspanning?
+
+## Modeluitwerking
+- Referentie-uitwerking voor nabespreking: `docs/lab-uitwerkingen/lab-03/`

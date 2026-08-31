@@ -45,9 +45,14 @@ class ChangeRequestService:
         current = self.get(request_id)
         if current.status is not Status.DRAFT:
             raise ValueError("Alleen DRAFT kan worden ingediend.")
-        missing = [f for f in ("title", "description", "requester") if not getattr(current, f).strip()]
+        required = {
+            "title": current.title,
+            "description": current.description,
+            "requester": current.requester,
+        }
+        missing = [name for name, value in required.items() if not value.strip()]
         if missing:
-            raise ValueError(f"Verplichte velden ontbreken: {', '.join(missing)}.")
+            raise ValueError(f"Verplichte velden ontbreken: {', '.join(missing)}")
         updated = replace(current, status=Status.SUBMITTED)
         self._items[request_id] = updated
         return updated

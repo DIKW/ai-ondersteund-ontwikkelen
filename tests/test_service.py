@@ -37,6 +37,15 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
+    def test_submit_without_required_fields_raises(self) -> None:
+        request = self.service.create_change_request(title="", description="", requester="")
+
+        with self.assertRaisesRegex(ValueError, "Verplichte velden ontbreken"):
+            self.service.submit_change_request(request.id)
+
+        current = self.service.get(request.id)
+        self.assertEqual(current.status, Status.DRAFT)
+
     def test_list_open_requests_excludes_closed(self) -> None:
         request = self.service.create_change_request(
             title="Nieuwe feature",

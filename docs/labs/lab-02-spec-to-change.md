@@ -2,7 +2,7 @@
 
 - **Doel:** spec vertalen naar kleine implementatie met bewijs.
 - **Tijd:** 60-75 min
-- **Startpunt:** uitkomst lab 01
+- **Startpunt:** voorbeeldfeature uit Lab 01: `docs/lab-uitwerkingen/lab-01/voorbeeld-feature-voor-lab-02.md`
 
 ## Definitie: kleine wijziging
 
@@ -16,18 +16,27 @@ Gebruik in dit lab een wijziging die klein en gecontroleerd blijft:
 Voorbeeld van passende scope: validatie toevoegen op een bestaande service-methode met bijbehorende testaanpassing.
 
 ## Stappen
-1. Vraag de planner om een plan.
-2. Beslis als mens of plan klein genoeg is.
-3. Laat implementer de wijziging uitvoeren.
-4. Laat relevante tests draaien.
-5. Laat reviewer of andere deelnemer toetsen tegen de spec.
-6. Verwerk 1 bevinding of motiveer afwijzing.
+1. Lees eerst de voorbeeldfeature uit Lab 01 en gebruik die als input voor de planner.
+2. Vraag de planner om een plan.
+3. Beslis als mens of plan klein genoeg is.
+4. Laat implementer de wijziging uitvoeren.
+5. Laat relevante tests draaien.
+6. Laat reviewer of andere deelnemer toetsen tegen de spec.
+7. Verwerk 1 bevinding of motiveer afwijzing.
 
 ## Verwachte artefacten
+- Planner-input: voorbeeldfeature uit Lab 01
 - Plan
 - Kleine codewijziging
 - Testbewijs
 - Reviewuitkomst
+- Planner input/output (max. 5 stappen, relevante bestanden, aannames, risico's, open vragen)
+- Implementer input/output (diff-samenvatting, testuitvoer, onzekerheden)
+- Reviewer input/output (oordeel + onderbouwing)
+
+## Modeluitwerking (voor reviewfase)
+- Zie `docs/lab-uitwerkingen/lab-02/model-uitwerking.md`.
+- Gebruik deze uitwerking pas na de eigen poging van het team, als kalibratie.
 
 ## Kwaliteitscheck
 - Gebruik onderstaande rubric. Richtlijn: minimaal **voldoende** op alle criteria.
