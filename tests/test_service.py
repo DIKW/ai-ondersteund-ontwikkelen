@@ -37,6 +37,35 @@ class ChangeRequestServiceTests(unittest.TestCase):
 
         self.assertEqual(submitted.status, Status.SUBMITTED)
 
+    def test_priority_can_change_while_request_is_draft(self) -> None:
+        request = self.service.create_change_request(
+            title="Nieuwe feature",
+            description="Kleine wijziging",
+            requester="team-ops",
+            priority="LOW",
+        )
+
+        updated = self.service.update_priority(request.id, "HIGH")
+
+        self.assertEqual(updated.priority, "HIGH")
+        self.assertEqual(updated.status, Status.DRAFT)
+
+    def test_priority_cannot_change_after_submit(self) -> None:
+        request = self.service.create_change_request(
+            title="Nieuwe feature",
+            description="Kleine wijziging",
+            requester="team-ops",
+            priority="LOW",
+        )
+        self.service.submit_change_request(request.id)
+
+        with self.assertRaisesRegex(ValueError, "Prioriteit kan niet meer worden gewijzigd"):
+            self.service.update_priority(request.id, "HIGH")
+
+        current = self.service.get(request.id)
+        self.assertEqual(current.priority, "LOW")
+        self.assertEqual(current.status, Status.SUBMITTED)
+
     def test_submit_without_required_fields_raises(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")
 
