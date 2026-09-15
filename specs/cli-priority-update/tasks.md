@@ -1,0 +1,22 @@
+# Tasks: prioriteit wijzigen via de CLI
+
+| Taak | Eigenaar/Rol | Bewijs | Stopvoorwaarde |
+|---|---|---|---|
+| **T1 (AC1) - Parser-test eerst:** voeg in `tests/test_cli.py` een test toe die `priority 1 HIGH` parseert en command, integer-id en ongewijzigde prioriteitswaarde controleert. | Implementer | Een gerichte parser-test die vóór implementatie faalt omdat het subcommando ontbreekt en na implementatie slaagt. | Stop en escaleer als voor het parsercontract nieuwe prioriteitsvalidatie nodig blijkt. |
+| **T2 (AC2, AC5) - Positieve CLI-test eerst:** voeg een subprocess-test toe die een bestaand `DRAFT`-verzoek via `--db` van een bestaande prioriteit naar `HIGH` wijzigt. Controleer exitcode 0, opgeslagen prioriteit, behouden status `DRAFT` en uitvoer met id, status en prioriteit. | Implementer | Falsificerend testresultaat vóór implementatie en een groene test na implementatie; gelezen JSON en stdout bevatten de verwachte waarden. | Stop als succes niet bewijsbaar is zonder gedrag buiten het priority-commando te wijzigen. |
+| **T3 (AC3, AC4) - Negatieve CLI-test eerst:** voeg een subprocess-test toe die wijziging van een opgeslagen `SUBMITTED`-verzoek probeert en exitcode 1, duidelijke bestaande servicefout en behoud van opgeslagen prioriteit en status controleert. | Implementer | Falsificerend testresultaat vóór implementatie en een groene test na implementatie; JSON-asserties bewijzen dat geen mutatie is opgeslagen. | Stop als weigering extra CLI-statuslogica of een wijziging van statusovergangen vereist. |
+| **T4 (AC2, AC3, AC4) - Statusbreed servicebewijs:** behoud de positieve `DRAFT`-test en breid `tests/test_service.py` compact uit voor `IN_REVIEW`, `APPROVED`, `REJECTED` en `CLOSED`; controleer per status foutmelding en behoud van prioriteit en status. | Implementer | Groene service-tests voor `DRAFT` en alle vijf niet-`DRAFT`-statussen, inclusief de bestaande `SUBMITTED`-test. | Stop en escaleer als de bestaande service de domeinregel niet uniform afdwingt en productiecode buiten `cli.py` nodig is. |
+| **T5 (AC1, AC2, AC3, AC4, AC5) - Implementeer minimale CLI-wiring:** voeg in `src/change_request_tracker/cli.py` de `priority`-subparser met positionele `id` en `priority` toe; dispatch naar `service.update_priority`, sla alleen na succes op en toon het resultaat via de bestaande printfunctie. | Implementer | Kleine diff in uitsluitend `cli.py`; geen statuscheck, prioriteitsvalidatie of nieuwe dependency in de CLI. | Stop zodra T1-T3 slagen; escaleer als hiervoor de service, modellen, opslagvorm of andere commando's moeten wijzigen. |
+| **T6 (AC1-AC5) - Voer gerichte tests uit:** voer `python -m unittest tests.test_cli tests.test_service -v` uit. | Implementer | Commando eindigt met exitcode 0 en alle gerichte tests zijn groen. | Stop bij een mislukking; herstel alleen binnen `cli.py`, `test_cli.py` en `test_service.py`, of escaleer bij benodigde scopegroei. |
+| **T7 (AC6) - Afsluitende repositoryverificatie:** voer `bash scripts/check.sh` uit en controleer de wijziging nogmaals tegen spec en niet-doen-lijst. | Implementer | Exitcode 0 en volledige unittest-uitvoer zonder fouten; diff blijft beperkt tot toegestane bestanden. | Stop en draag niet over bij regressie, onverwachte bestandswijziging of een open blokkerende vraag. |
+
+## Traceerbaarheid
+
+| Acceptatiecriterium | Taken | Verwacht bewijs |
+|---|---|---|
+| AC1 - Parsercontract en ongewijzigd doorgeven | T1, T5, T6 | Groene parser-test met integer-id en `HIGH`; gerichte suite groen. |
+| AC2 - Succesvol en persistent wijzigen in `DRAFT` | T2, T4, T5, T6 | Groene CLI-test met exitcode 0 en JSON-prioriteit `HIGH`; groene positieve service-test; status blijft `DRAFT`. |
+| AC3 - Weigering na indienen | T3, T4, T5, T6 | Groene CLI-test voor `SUBMITTED` met exitcode 1 en foutmelding; groene service-tests voor alle niet-`DRAFT`-statussen. |
+| AC4 - Geen gegevensmutatie bij weigering | T3, T4, T5, T6 | JSON-asserties en service-asserties tonen ongewijzigde prioriteit en status. |
+| AC5 - Bijgewerkt verzoek zichtbaar | T2, T5, T6 | Stdout-asserties bevatten id, `status=DRAFT` en `priority=HIGH`. |
+| AC6 - Bestaande controles blijven groen | T7 | `bash scripts/check.sh` eindigt met exitcode 0. |

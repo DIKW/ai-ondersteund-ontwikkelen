@@ -86,6 +86,10 @@ def build_parser() -> argparse.ArgumentParser:
     submit_parser = subparsers.add_parser("submit", help="Dien een DRAFT issue in")
     submit_parser.add_argument("id", type=int, help="Issue-id")
 
+    priority_parser = subparsers.add_parser("priority", help="Wijzig de prioriteit van een DRAFT issue")
+    priority_parser.add_argument("id", type=int, help="Issue-id")
+    priority_parser.add_argument("priority", help="Nieuwe prioriteit")
+
     transition_parser = subparsers.add_parser("transition", help="Zet issue naar een andere status")
     transition_parser.add_argument("id", type=int, help="Issue-id")
     transition_parser.add_argument("status", choices=[status.value for status in Status], help="Doelstatus")
@@ -185,6 +189,12 @@ def main() -> int:
             updated = service.submit_change_request(args.id)
             _save_service(service, db_path)
             print(f"Issue {updated.id} ingediend: status={updated.status.value}")
+            return 0
+
+        if args.command == "priority":
+            updated = service.update_priority(args.id, args.priority)
+            _save_service(service, db_path)
+            _print_request(updated)
             return 0
 
         if args.command == "transition":
