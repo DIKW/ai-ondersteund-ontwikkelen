@@ -50,6 +50,16 @@ class CLITests(unittest.TestCase):
 
         self.assertEqual(args.db, ".issues.json")
 
+    def test_parser_accepts_priority_command(self) -> None:
+        from change_request_tracker.cli import build_parser
+
+        parser = build_parser()
+        args = parser.parse_args(["priority", "1", "HIGH"])
+
+        self.assertEqual(args.command, "priority")
+        self.assertEqual(args.id, 1)
+        self.assertEqual(args.priority, "HIGH")
+
     def test_demo_command_persists_seeded_data_to_demo_db(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             demo_db_path = Path(tmp) / "demo-issues.json"
@@ -88,6 +98,62 @@ class CLITests(unittest.TestCase):
         self.assertEqual(list_result.returncode, 0)
         self.assertIn("id=1", list_result.stdout)
         self.assertIn("status=DRAFT", list_result.stdout)
+
+    def test_priority_command_updates_draft_and_prints_request(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            db_path = Path(tmp) / "issues.json"
+            db_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "id": 1,
+                            "title": "Bug in export",
+                            "description": "CSV export mist kolommen",
+                            "requester": "team-data",
+                            "priority": "LOW",
+                            "status": "DRAFT",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = self.run_cli("--db", str(db_path), "priority", "1", "HIGH")
+            saved_items = json.loads(db_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(saved_items[0]["priority"], "HIGH")
+        self.assertEqual(saved_items[0]["status"], "DRAFT")
+        self.assertIn("id=1", result.stdout)
+        self.assertIn("status=DRAFT", result.stdout)
+        self.assertIn("priority=HIGH", result.stdout)
+
+    def test_priority_command_rejects_submitted_without_persisting_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            db_path = Path(tmp) / "issues.json"
+            db_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "id": 1,
+                            "title": "Bug in export",
+                            "description": "CSV export mist kolommen",
+                            "requester": "team-data",
+                            "priority": "LOW",
+                            "status": "SUBMITTED",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = self.run_cli("--db", str(db_path), "priority", "1", "HIGH")
+            saved_items = json.loads(db_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("Fout: Prioriteit kan niet meer worden gewijzigd", result.stdout)
+        self.assertEqual(saved_items[0]["priority"], "LOW")
+        self.assertEqual(saved_items[0]["status"], "SUBMITTED")
 
     def test_list_without_all_hides_closed_issues(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

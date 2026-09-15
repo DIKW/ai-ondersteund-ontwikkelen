@@ -7,7 +7,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from change_request_tracker.models import Status
+from change_request_tracker.models import ChangeRequest, Status
 from change_request_tracker.service import ChangeRequestService
 
 
@@ -65,6 +65,20 @@ class ChangeRequestServiceTests(unittest.TestCase):
         current = self.service.get(request.id)
         self.assertEqual(current.priority, "LOW")
         self.assertEqual(current.status, Status.SUBMITTED)
+
+    def test_priority_cannot_change_in_later_statuses(self) -> None:
+        for status in (Status.IN_REVIEW, Status.APPROVED, Status.REJECTED, Status.CLOSED):
+            with self.subTest(status=status):
+                service = ChangeRequestService(
+                    items=[ChangeRequest(id=1, priority="LOW", status=status)]
+                )
+
+                with self.assertRaisesRegex(ValueError, "Prioriteit kan niet meer worden gewijzigd"):
+                    service.update_priority(1, "HIGH")
+
+                current = service.get(1)
+                self.assertEqual(current.priority, "LOW")
+                self.assertEqual(current.status, status)
 
     def test_submit_without_required_fields_raises(self) -> None:
         request = self.service.create_change_request(title="", description="", requester="")
