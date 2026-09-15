@@ -75,6 +75,8 @@ class ChangeRequestService:
 
     def update_priority(self, request_id: int, priority: str) -> ChangeRequest:
         current = self.get(request_id)
+        if current.status is not Status.DRAFT:
+            raise ValueError("Prioriteit kan niet meer worden gewijzigd")
         updated = replace(current, priority=priority)
         self._items[request_id] = updated
         return updated
