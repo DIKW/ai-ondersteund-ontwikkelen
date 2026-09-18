@@ -92,6 +92,8 @@ contradictions: [other-page]
 
 Use `confidence`, `contested`, and `contradictions` when claims are single-source, opinion-heavy, fast-changing, uncertain, or conflicting. Every tag must exist in `SCHEMA.md`.
 
+Use wiki-root-relative Obsidian wikilinks, including the containing folder, such as `[[concepts/loop-engineering]]` or `[[entities/example]]`. Do not use basename-only links such as `[[loop-engineering]]`, because they can resolve ambiguously or create detached notes when the vault contains duplicate names.
+
 Every new or updated page must:
 
 - include traceable source references
