@@ -1,7 +1,7 @@
 ---
 name: Loop Orchestrator
 description: Orchestreert een begrensde planner-implementer-reviewer-loop voor een goedgekeurde feature.
-tools: [agent, read, search]
+tools: [read, agent, vscodeGeneral/usages, search]
 agents: [Planner, Implementer, Reviewer]
 ---
 
