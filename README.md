@@ -76,7 +76,7 @@ Zie `docs/labs/` voor werkbladen.
 
 ## LLMWiki-voorbereiding
 
-De startstructuur voor dag 3 staat in `knowledge-lab/`.
+De startstructuur voor dag 3 staat in `lab-llm-wiki/`.
 
 ## Waarschuwing
 

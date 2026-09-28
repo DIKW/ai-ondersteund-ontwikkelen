@@ -10,5 +10,5 @@
 - Vergroot de scope niet.
 - Benoem aannames, gewijzigde bestanden en uitgevoerde controles.
 - Gebruik nooit `--allow-all` of `--yolo` bij Copilot CLI.
-- Lees bij werk in `knowledge-lab/` eerst `knowledge-lab/SCHEMA.md`, `knowledge-lab/index.md`, `knowledge-lab/log.md` en `knowledge-lab/WORKFLOW.md`.
+- Lees bij werk in `lab-llm-wiki/` eerst `lab-llm-wiki/SCHEMA.md`, `lab-llm-wiki/index.md`, de laatste 20-30 regels van `lab-llm-wiki/log.md` en `lab-llm-wiki/WORKFLOW.md`.
 - Stop en vraag om menselijke besluitvorming bij onzekerheid over scope, privacy, security of gewenste bedrijfsregel.

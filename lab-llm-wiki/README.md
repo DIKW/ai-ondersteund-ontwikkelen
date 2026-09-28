@@ -11,7 +11,7 @@ Dit is een minimale, veilige startstructuur voor dag 3.
 - Maak per oefening maximaal drie wiki-pagina's uit trainer-bronnen.
 - Menselijke review is verplicht voor bronselectie, inhoudelijke juistheid, confidence en tegenstrijdigheden.
 
-**Domein:** AI-ondersteunde softwareontwikkeling.
+**Domein:** AI-ondersteunde softwareontwikkeling en, als expliciete trainingsuitbreiding, organisatiebrede inzet van data en AI.
 
 **Voorbeeldquery:**
 > Welke controles zijn nodig voordat een AI-ondersteunde wijziging voor menselijke merge-review kan worden aangeboden?

@@ -2,9 +2,14 @@
 
 ## Domein en grenzen
 
-Het domein van deze wiki is **AI-ondersteunde softwareontwikkeling**. De wiki legt kennis vast over de methoden, werkprocessen, verificatie en menselijke verantwoordelijkheid die daarbij horen. Het functionele domein van de trainingsapp (`change-request-tracker`) is niet het domein van deze wiki.
+Deze wiki heeft twee verbonden, maar onderscheiden aandachtsgebieden:
 
-Neem geen onderwerpen op die buiten dit domein vallen, tenzij ze nodig zijn om een bron of relatie binnen het domein te begrijpen. Gebruik geen productie- of klantdata. Externe of ongeverifieerde bronnen vereisen vooraf menselijke goedkeuring.
+1. **AI-ondersteunde softwareontwikkeling:** methoden, werkprocessen, verificatie en menselijke verantwoordelijkheid bij softwarewerk met AI.
+2. **Organisatiebrede inzet van data en AI:** organisatorische capaciteiten, datagedreven besluitvorming, experimenteren en procesanalyse of -verbetering, waaronder process mining.
+
+Het tweede aandachtsgebied is een expliciete uitbreiding voor de training. Maak steeds duidelijk of een bron gaat over AI gebruiken om software te ontwikkelen, of over data en AI inzetten in organisatie- en bedrijfsprocessen. Verbind die onderwerpen alleen wanneer de bron of de beschreven toepassing dat ondersteunt. Het functionele domein van de trainingsapp (`change-request-tracker`) is niet het domein van deze wiki.
+
+Neem alleen herbruikbare methoden en inzichten op die binnen deze afbakening vallen. Behandel leveranciersclaims, commerciële voorbeelden en niet-onafhankelijk gevalideerde resultaten als toegeschreven bronclaims, niet als vaststaande feiten. Gebruik geen productie- of klantdata. Externe of ongeverifieerde bronnen vereisen vooraf menselijke goedkeuring.
 
 De domeinpagina staat onder `domains/`. Personen krijgen een eigen top-level ingang onder `people/`; behandel personen als afzonderlijke kennisentiteiten en leg alleen controleerbare, relevante informatie vast.
 

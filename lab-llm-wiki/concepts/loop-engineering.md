@@ -1,15 +1,13 @@
 ---
 title: Loop Engineering
 created: 2026-09-18
-updated: 2026-09-18
+updated: 2026-09-28
 type: concept
 tags: [loop-engineering, verification, review, governance]
-sources: [raw/articles/dikw-loop-engineering.md, raw/articles/ibm-loop-engineering.md]
+sources: [raw/articles/dikw-loop-engineering.md, raw/articles/ibm-loop-engineering.md, "raw/articles/Loop engineering Getting started with loops.md"]
 confidence: medium
 contested: false
 ---
-
-# Loop Engineering
 
 ## Definitie
 
@@ -32,11 +30,24 @@ De cyclus is herhaalbaar: een mislukte verificatie of review brengt het werk ter
 
 IBM beschrijft een vergelijkbare lus met vier fasen: **Goal**, **Action**, **Observation** en **Adjustment**. Het doel bevat toetsbare stopcriteria, de agent voert een actie uit, het systeem observeert het resultaat en de aanpak wordt aangepast voordat de volgende iteratie start. Deze fasering is een compactere operationele beschrijving van de hierboven beschreven plan-, implementatie- en verificatiestappen. ^[raw/articles/ibm-loop-engineering.md]
 
+## Lusvormen volgens Anthropic
+
+Anthropic onderscheidt in een Claude Code-artikel vier vormen naar trigger en stopconditie:
+
+- **Turn-based:** een gebruiker start iedere cyclus; geschikt voor losse, kortere taken.
+- **Goal-based:** een expliciet doel en een maximumaantal beurten begrenzen de iteratie.
+- **Time-based:** een interval start herhaald werk; het stopt wanneer het wordt uitgezet of de taak klaar is.
+- **Proactive:** een event of schema start een terugkerende routine zonder menselijke start per taak; elke taak heeft een eigen stopconditie.
+
+Dit is Anthropic's productgerichte indeling, geen universele standaard. Ze deelt loops in naar start- en stopmechanisme; IBM's **Goal**, **Action**, **Observation** en **Adjustment** beschrijven juist fasen binnen een iteratie. Beide invalshoeken kunnen elkaar aanvullen. De bron adviseert expliciete grenzen, verificatie, kleine pilots en bewaking van model- en tokengebruik. [^1]
+
 ## Relatie met Spec-Driven Development
 
 [[concepts/spec-driven-development]] bepaalt wat het juiste resultaat is. Loop Engineering organiseert hoe een AI-agent daar gecontroleerd naartoe werkt. Acceptatiecriteria worden daardoor ook stopvoorwaarden van de loop.
 
 De overgang van vibe coding naar Loop Engineering is volgens de bron een overgang van `prompt and hope` naar `specify and verify`. Vibe coding kan nuttig blijven voor verkenning, maar is op zichzelf geen voldoende kwaliteitsproces voor gedeelde of bedrijfskritische codebases.
+
+De grafische control-flowpatronen voor agentworkflows staan beschreven in [[concepts/agentic-workflow-patterns]].
 
 ## Technische bouwstenen
 
@@ -55,3 +66,6 @@ Deze pagina is gebaseerd op één bron en heeft daarom `confidence: medium`. De 
 - [[concepts/spec-driven-development]]
 - [DIKW: Loop Engineering voorbij de hype](https://dikw.com/technologie/loop-engineering/)
 - [IBM Think: What is loop engineering?](https://www.ibm.com/think/topics/loop-engineering)
+- [Anthropic: Getting started with loops](https://claude.com/blog/getting-started-with-loops) [^1]
+
+[^1]: `raw/articles/Loop engineering Getting started with loops.md`. De bronmetadata noemt alleen "Jun 30" als publicatiedatum; het jaar is niet vastgelegd.
