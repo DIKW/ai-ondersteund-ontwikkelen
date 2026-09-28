@@ -47,7 +47,7 @@ This prevents duplicate pages, missed cross-references, schema violations, and r
 ## Three-layer architecture
 
 1. **Raw sources:** `$WIKI_ROOT/raw/` is immutable. Read it, never edit, rename, or delete it.
-2. **Wiki pages:** `$WIKI_ROOT/entities/`, `$WIKI_ROOT/concepts/`, `$WIKI_ROOT/queries/`, and other approved Markdown pages are maintained summaries and syntheses.
+2. **Wiki pages:** `$WIKI_ROOT/domains/`, `$WIKI_ROOT/people/`, `$WIKI_ROOT/entities/`, `$WIKI_ROOT/concepts/`, `$WIKI_ROOT/comparisons/`, `$WIKI_ROOT/queries/`, and `$WIKI_ROOT/summaries/` contain maintained summaries and syntheses.
 3. **Schema and navigation:** `$WIKI_ROOT/SCHEMA.md` defines conventions and tags; `$WIKI_ROOT/index.md` catalogs pages; `$WIKI_ROOT/log.md` is the append-only activity record.
 
 ## Repository constraints
@@ -81,18 +81,20 @@ Use lowercase, hyphenated filenames. Every page should contain YAML frontmatter:
 title: Page title
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-type: entity | concept | comparison | query | summary
+type: concept
 tags: [verification, review]
 sources: [raw/source.md]
-confidence: high | medium | low
-contested: true | false
-contradictions: [other-page]
+confidence: medium
+contested: false
+contradictions: []
 ---
 ```
 
-Use `confidence`, `contested`, and `contradictions` when claims are single-source, opinion-heavy, fast-changing, uncertain, or conflicting. Every tag must exist in `SCHEMA.md`.
+The page `type` determines its folder: `domains/`, `people/`, `entities/`, `concepts/`, `comparisons/`, `queries/`, or `summaries/`. The required fields, source rules, domain boundary, and allowed tags are defined in `$WIKI_ROOT/SCHEMA.md`.
 
-Use wiki-root-relative Obsidian wikilinks, including the containing folder, such as `[[concepts/loop-engineering]]` or `[[entities/example]]`. Do not use basename-only links such as `[[loop-engineering]]`, because they can resolve ambiguously or create detached notes when the vault contains duplicate names.
+Include every field shown in the frontmatter on each page. Use `confidence: high | medium | low`, a boolean `contested`, and a `contradictions` list; follow `SCHEMA.md` for when a claim needs an explicit uncertainty or contradiction signal. Every tag must exist in `SCHEMA.md`.
+
+Use wiki-root-relative Obsidian wikilinks, including the containing folder, such as `[[domains/ai-ondersteunde-softwareontwikkeling]]`, `[[people/example-person]]`, or `[[concepts/loop-engineering]]`. Do not use basename-only links such as `[[loop-engineering]]`, because they can resolve ambiguously or create detached notes when the vault contains duplicate names.
 
 Every new or updated page must:
 
